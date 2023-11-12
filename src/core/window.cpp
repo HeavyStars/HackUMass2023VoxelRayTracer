@@ -1,12 +1,17 @@
 #include "window.hpp"
 Window::Window(int w, int h, std::string title) :
-renderImage(w, h) {
+renderImage(1920, 1080) {
     _window = new sf::RenderWindow(sf::VideoMode(w, h), title);
-    _window->setFramerateLimit(120);
+    _window->setFramerateLimit(288);
     ImGui::SFML::Init(*_window);
     _running = false;
     windowWidth = w;
     windowHeight = h;
+
+    _renderView.reset(sf::FloatRect(0, 0, 1920, 1080));
+    float yPos = std::max((1-(((1080.f/1920.f)*(float)windowWidth)/(float)windowHeight))/2.f, 0.f);
+    float viewHeight = (yPos > 0) ? ((1080.f/1920.f)*(float)windowWidth)/(float)windowHeight : 1.f;
+    _renderView.setViewport(sf::FloatRect(0.f, yPos, 1.f, viewHeight));
 }
 
 Window::~Window(){
@@ -34,6 +39,9 @@ void Window::run(){
                 case sf::Event::Resized: {
                     windowWidth = event.size.width;
                     windowHeight = event.size.height;
+                    float yPos = std::max((1-(((1080.f/1920.f)*(float)windowWidth)/(float)windowHeight))/2.f, 0.f);
+                    float viewHeight = (yPos > 0) ? ((1080.f/1920.f)*(float)windowWidth)/(float)windowHeight : 1.f;
+                    _renderView.setViewport(sf::FloatRect(0.f, yPos, 1.f, viewHeight));
                     break;
                 }
                 default: {
@@ -60,7 +68,7 @@ void Window::run(){
         ImGui::End();
         //END IMGUI UPDATES
 
-        renderImage.update();
+        renderImage.update(deltaTime);
         sf::Time updateEnd = deltaClock.getElapsedTime();
         updateTime = updateEnd-updateStart;
         //END UPDATE WINDOW---------------------------------------------------------------------------------------
@@ -68,9 +76,13 @@ void Window::run(){
         //START RENDERING-----------------------------------------------------------------------------------------
         sf::Time renderStart = deltaClock.getElapsedTime();
         _window->clear(sf::Color(0, 0, 0));
+
         const sf::Texture & scene = renderImage.render();
         sf::Sprite drawScene(scene);
+        _window->setView(_renderView);
         _window->draw(drawScene);
+        _window->setView(_window->getDefaultView());
+
         ImGui::SFML::Render(*_window);
         _window->display();
         
@@ -80,7 +92,7 @@ void Window::run(){
 
 
         //FPS ENFORCE STRICT TIME TO 60FPS
-        sf::Time targetTime = sf::seconds(1.f/60.f-0.0000021);
+        sf::Time targetTime = sf::seconds(1.f/144.f-0.0000021);
         sf::Time checkTime = deltaClock.getElapsedTime();
         frameTime = checkTime;
         while (checkTime < targetTime) {

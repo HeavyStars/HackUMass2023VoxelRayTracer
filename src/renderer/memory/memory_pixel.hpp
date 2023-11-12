@@ -188,7 +188,7 @@ struct Pixel {
 
   void writeToArray(int paramIndex, sf::Uint8 * updateArray, int itemSize) {
 
-    if (paramIndex > itemSize) {
+    if (paramIndex >= itemSize) {
       throw std::invalid_argument("Error, attempted to write pixel to out of bounds area.");
     }
 

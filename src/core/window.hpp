@@ -27,6 +27,8 @@ private:
     int windowWidth;
     int windowHeight;
 
+    sf::View _renderView;
+
     Renderer renderImage;
 
 };
