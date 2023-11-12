@@ -1,8 +1,9 @@
 #include "vec3.hpp"
 
-Vec3::Vec3(float x, float y, float) : 
-_x = x, _y = y, _z = z {
-  
+Vec3::Vec3(float x, float y, float z) {
+  _x = x;
+  _y = y;
+  _z = z;
 }
 
 void Vec3::setX(int x){
@@ -17,15 +18,15 @@ void Vec3::setZ(int z){
   _z = z;
 }
 
-float Vec3::getX(){
+float Vec3::getX() const {
   return _x;
 }
 
-float Vec3::getY(){
+float Vec3::getY() const {
   return _y;
 }
 
-float Vec3::getZ(){
+float Vec3::getZ() const {
   return _z;
 }
 
@@ -58,7 +59,7 @@ float Vec3::getMagnitude(float squared) const{
 
 void Vec3::normalizeVector(){
   float squared = squareVector();
-  float magnitude = getMagnitude();
+  float magnitude = getMagnitude(squared);
   if (magnitude != 0){
     _x = _x / magnitude;
     _y = _y / magnitude;

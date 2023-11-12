@@ -1,7 +1,10 @@
 #include "quaternion.hpp"
 
-Quaternion::Quaternion(float x, float y, float z, float w) :
-_x = x, _y = y, _z = z, _w = w {
+Quaternion::Quaternion(float x, float y, float z, float w) {
+  _x = x;
+  _y = y;
+  _z = z;
+  _w = w;
 }
 
 void Quaternion::setX(float x){
@@ -20,19 +23,19 @@ void Quaternion::setW(float w){
   _w = w;
 }
 
-float Quaternion::getX(){
+float Quaternion::getX() const {
   return _x;
 }
 
-float Quaternion::getY(){
+float Quaternion::getY() const {
   return _y;
 }
 
-float Quaternion::getZ(){
+float Quaternion::getZ() const {
   return _z;
 }
 
-float Quaternion::getW(){
+float Quaternion::getW() const{
   return _w;
 }
 
@@ -57,7 +60,7 @@ void Quaternion::normalizeQuat(){
   }
 }
 
-float Quaternion::dotProduct(const Quaternion& quat){
-  return _w * quat.getW() + _x * quat.getX() + _y * quat.getY() + _z * quat.getZ();
+ float Quaternion::dotProduct(const Quaternion& quat) const{
+  return (_w * quat.getW() + _x * quat.getX() + _y * quat.getY() + _z * quat.getZ());
 }
 

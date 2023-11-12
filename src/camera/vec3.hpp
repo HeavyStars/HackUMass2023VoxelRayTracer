@@ -33,7 +33,7 @@ public:
 private:
   float _x;
   float _y;
-  float _x;
+  float _z;
 
 
 };

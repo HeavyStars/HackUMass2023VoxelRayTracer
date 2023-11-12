@@ -4,6 +4,7 @@
 
 class Camera{
 public:
+  Camera();
 
 private:
   float _acceleration;

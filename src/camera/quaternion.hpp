@@ -19,15 +19,13 @@ public:
   float getZ() const;
   float getW() const;
 
-  Quaternion crossProduct(const Quaternion& quat);
+  
   float dotProduct(const Quaternion& quat) const;
   float squareQuat() const;
   float getMagnitude(float square) const;
   void normalizeQuat();
-  Quaternion invertQuat() const;
+  
 
-  void operation*(const Quaternion& quat);
-  void operation*(const Vec3& vec);
 
 
 private:
