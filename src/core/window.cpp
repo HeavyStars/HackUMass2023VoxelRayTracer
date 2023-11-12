@@ -1,5 +1,5 @@
 #include "window.hpp"
-Window::Window(int w, int h, std::string title){
+Window::Window(int w, int h, std::string title) {
     _window = new sf::RenderWindow(sf::VideoMode(w, h), title);
     _window->setFramerateLimit(120);
     ImGui::SFML::Init(*_window);
@@ -67,6 +67,7 @@ void Window::run(){
         //START RENDERING-----------------------------------------------------------------------------------------
         sf::Time renderStart = deltaClock.getElapsedTime();
         _window->clear(sf::Color(0, 0, 0));
+        
         ImGui::SFML::Render(*_window);
         _window->display();
         
