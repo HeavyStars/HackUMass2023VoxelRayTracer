@@ -41,7 +41,7 @@ float Vec3::dotProduct(const Vec3& vector) const {
   return _x * vector.getX() + _y * vector.getY() + _z * vector.getZ();
 }
 
-float Vec3::scalarMultiplication(float scalar){
+void Vec3::scalarMultiplication(float scalar){
   _x = _x * scalar;
   _y = _y * scalar;
   _z = _z * scalar;
@@ -68,11 +68,11 @@ void Vec3::normalizeVector(){
 }
 
 float Vec3::operator*(const Vec3& vector) const {
-  return dotProduct(vector);
+  return 0;
 }
 
-float Vec3::operator*(float scalar){
-  return scalarMultiplication(scalar);
+void Vec3::operator*(float scalar){
+  scalarMultiplication(scalar);
 }
 
 void Vec3::operator-(const Vec3& vector){

@@ -19,13 +19,13 @@ public:
   
   Vec3 crossProduct(const Vec3& vector);
   float dotProduct(const Vec3& vector) const;
-  float scalarMultiplication(float scalar);
+  void scalarMultiplication(float scalar);
   float squareVector() const;
   float getMagnitude(float squared) const;
   void normalizeVector();
 
   float operator*(const Vec3& vector) const;
-  float operator*(float scalar);
+  void operator*(float scalar);
   void operator-(const Vec3& vector);
   void operator+(const Vec3& vector);
 
