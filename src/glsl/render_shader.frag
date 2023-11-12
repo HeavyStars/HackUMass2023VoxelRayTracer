@@ -111,7 +111,7 @@ void main() {
   vec2 uv = (gl_FragCoord.xy-.5*u_resolution.xy)/u_resolution.y;
   vec3 backgroundColor = vec3(0.5, 0.5, 1.0);
 
-  vec3 rayPos = vec3(0.0, 0.0, -17.0);
+  vec3 rayPos = vec3(0.0, 0.0, -50.0);
   vec3 rayDir = normalize(vec3(uv, 1.02));
 		
 	rayPos.xz = rotate2d(rayPos.xz, u_time);
