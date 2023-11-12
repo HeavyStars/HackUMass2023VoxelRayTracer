@@ -19,10 +19,12 @@ void Window::run(){
     while(_running){
 
         deltaTime = deltaClock.restart();
+
+        //UPDATE WINDOW-------------------------------------------------------------------------------------------
         sf::Time updateStart = deltaClock.getElapsedTime();
 
         sf::Event event;
-        while(_window->pollEvent(event)){
+        while(_window->pollEvent(event)) {
             switch(event.type){
                 case sf::Event::Closed: {
                     _running = false;
@@ -42,10 +44,7 @@ void Window::run(){
         }
         ImGui::SFML::Update(*_window, deltaTime);
 
-
-        sf::Time updateEnd = deltaClock.getElapsedTime();
-        updateTime = updateEnd-updateStart;
-        
+        //IMGUI UPDATES
         ImGui::SetNextWindowPos(ImVec2(-1, 0));
         ImGui::SetNextWindowSize(ImVec2(windowWidth+5, 20));
         bool active = true;
@@ -58,19 +57,32 @@ void Window::run(){
         ImGui::Begin("Information", &active, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBringToFrontOnFocus);
         ImGui::Text(information.c_str());
         ImGui::End();
+        //END IMGUI UPDATES
 
-        _window->clear(sf::Color(0, 0, 0));
+
+        sf::Time updateEnd = deltaClock.getElapsedTime();
+        updateTime = updateEnd-updateStart;
+        //END UPDATE WINDOW---------------------------------------------------------------------------------------
+
+        //START RENDERING-----------------------------------------------------------------------------------------
         sf::Time renderStart = deltaClock.getElapsedTime();
+        _window->clear(sf::Color(0, 0, 0));
         ImGui::SFML::Render(*_window);
         _window->display();
         
         sf::Time renderEnd = deltaClock.getElapsedTime();
+        renderTime = renderEnd-renderStart;
+        //END RENDER TO WINDOW------------------------------------------------------------------------------------
+
+
+        //FPS ENFORCE STRICT TIME TO 60FPS
         sf::Time targetTime = sf::seconds(1.f/60.f-0.0000021);
         sf::Time checkTime = deltaClock.getElapsedTime();
         frameTime = checkTime;
         while (checkTime < targetTime) {
             checkTime = deltaClock.getElapsedTime();
         }
+        
     }
     _window->close();
 }

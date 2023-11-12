@@ -16,11 +16,13 @@ public:
 private:
     sf::RenderWindow *_window;
     bool _running;
+
     sf::Time deltaTime;
     sf::Time frameTime;
     sf::Time updateTime;
     sf::Time renderTime;
     sf::Clock deltaClock;
+    
     int windowWidth;
     int windowHeight;
 
