@@ -17,7 +17,10 @@ public:
   void setVoxel(Voxel voxel);
   bool hasVoxel(sf::Glsl::Vec3 pos);
   void clearVoxel(sf::Glsl::Vec3 pos);
+  void clearAll();
   Voxel getVoxel(sf::Glsl::Vec3 pos);
+
+  int getSize();
 
   void writeToTree(OctTree & writeTree);
 

@@ -20,18 +20,9 @@ _renderTree(1, 256) {
   _marcher.setUniform("u_resolution", uResolution);
   _marcher.setUniform("u_time", uTime.asSeconds());
 
-  _renderTree.bind(_marcher, "OctTree");
-  for (int z = 0; z < 256; z++) {
-    for (int y = 0; y < 256; y++) {
-      for (int x = 0; x < 256; x++) {
-        Voxel someVoxel;
-        someVoxel.setCol(sf::Glsl::Vec4(1, 1, 1, 255));
-        someVoxel.setPos(sf::Glsl::Vec3(x, y, z));
-        _mainChunk.setVoxel(someVoxel);
-      }
-    }
-  }
+  genChunkPerlin(_mainChunk);
 
+  _renderTree.bind(_marcher, "OctTree");
   _mainChunk.writeToTree(_renderTree);
 
   _marchDrawable[0].position = sf::Vector2f(0, 0);

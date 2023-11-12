@@ -36,12 +36,20 @@ void Chunk::clearVoxel(sf::Glsl::Vec3 pos) {
   voxels.erase(pos.z*_maxSize*_maxSize+pos.y*_maxSize+pos.x);
 }
 
+void Chunk::clearAll() {
+  voxels.clear();
+}
+
 Voxel Chunk::getVoxel(sf::Glsl::Vec3 pos) {
   if (!hasVoxel(pos)) {
     throw std::invalid_argument("logic error in getVoxel, pos did not exist!");
   }
 
   return voxels[pos.z*_maxSize*_maxSize+pos.y*_maxSize+pos.x];
+}
+
+int Chunk::getSize() {
+  return _maxSize;
 }
 
 void Chunk::writeToTree(OctTree & writeTree) {

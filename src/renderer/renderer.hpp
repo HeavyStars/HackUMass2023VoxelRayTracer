@@ -7,6 +7,7 @@
 #include "chunk.hpp"
 #include "voxel.hpp"
 #include "oct_tree.hpp"
+#include "chunk_gen.hpp"
 
 class Renderer{
 public:
